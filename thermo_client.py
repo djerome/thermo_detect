@@ -47,6 +47,9 @@ def read_temp(sensor):
 		temp_string = lines[1].strip()[temp_output+2:]
 		temp_c = float(temp_string) / 1000.0
 		return temp_c
+	else:
+		print 'Sensor ' + sensor + ' in error'
+		return 999
 
 hostname = socket.gethostname()
 sensor_types = thermo_clients[hostname]
@@ -58,7 +61,7 @@ for sensor_type in sensor_types:
 	if sensor_type == onewire:
 		os.system('modprobe w1-gpio')
 		os.system('modprobe w1-therm')
-		time.sleep(5)
+		time.sleep(15)
 
 	# prep to read i2c sensors
 	elif sensor_type == i2c:
